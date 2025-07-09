@@ -21,9 +21,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await loginUser(credentials);
       setUser(data);
+      console.log(data);
       localStorage.setItem("blogUser", JSON.stringify(data));
       navigate("/");
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };
@@ -35,6 +37,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("blogUser", JSON.stringify(data));
       navigate("/");
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };

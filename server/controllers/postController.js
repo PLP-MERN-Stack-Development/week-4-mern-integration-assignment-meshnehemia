@@ -14,6 +14,7 @@ exports.getPostById = async (req, res) => {
 exports.createPost = async (req, res) => {
   const newPost = new Post({ ...req.body, author: req.user._id });
   const savedPost = await newPost.save();
+  console.log(savedPost);
   res.status(201).json(savedPost);
 };
 

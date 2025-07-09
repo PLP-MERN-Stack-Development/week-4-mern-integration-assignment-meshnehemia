@@ -14,20 +14,25 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/posts/:id" element={<PostPage />} />
-            <Route path="/category/:categoryId" element={<CategoryPage />} />
-            <Route path="/login" element={<AuthPage type="login" />} />
-            <Route path="/register" element={<AuthPage type="register" />} />
+        <Routes>
+          {/* 👇 Layout wraps all child routes using <Outlet /> */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="posts/:id" element={<PostPage />} />
+            <Route path="category/:categoryId" element={<CategoryPage />} />
+            <Route path="login" element={<AuthPage type="login" />} />
+            <Route path="register" element={<AuthPage type="register" />} />
+
+            {/* ✅ Protected routes */}
             <Route element={<PrivateRoute />}>
-              <Route path="/create-post" element={<CreatePostPage />} />
-              <Route path="/edit-post/:id" element={<EditPostPage />} />
+              <Route path="create-post" element={<CreatePostPage />} />
+              <Route path="edit-post/:id" element={<EditPostPage />} />
             </Route>
+
+            {/* 404 */}
             <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Layout>
+          </Route>
+        </Routes>
       </AuthProvider>
     </Router>
   );
